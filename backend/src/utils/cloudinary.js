@@ -11,18 +11,10 @@ cloudinary.config({
 const uploadOnCloudinary = async (localFilePath) => {
     try {
         if (!localFilePath) return null;
-
-        // Setting a timeout of 2 minutes (120000 milliseconds)
-        // const response = await cloudinary.uploader.upload(localFilePath, {
-        //     timeout: 60000 // Timeout in milliseconds
-        // });
-        const res = await cloudinary.uploader.upload(localFilePath, {timeout:60000}, function(error,result){
-            console.log(result);
+        const response = await cloudinary.uploader.upload(localFilePath,{
+            resource_type : "auto"
         });
 
-        console.log(res);
-
-        // File has been uploaded successfully
         fs.unlinkSync(localFilePath);
         return response;
 
