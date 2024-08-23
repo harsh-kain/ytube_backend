@@ -20,10 +20,11 @@ const createTweet = asyncHandler(async (req, res) => {
         content,
         owner: user?._id,
     });
-
+    
     return res
         .status(200)
         .json(new ApiResponse(200, tweet, "Tweet add successfully"));
+
 });
 
 const getUserTweets = asyncHandler(async (req, res) => {
@@ -91,3 +92,5 @@ const deleteTweet = asyncHandler(async (req, res) => {
 });
 
 export { createTweet, getUserTweets, updateTweet, deleteTweet };
+
+
