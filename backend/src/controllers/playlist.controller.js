@@ -70,11 +70,60 @@ const getPlaylistById = asyncHandler(async (req, res) => {
 
 const addVideoToPlaylist = asyncHandler(async (req, res) => {
     const { playlistId, videoId } = req.params;
+    
+    if(!isValidObjectId(playlistId)){
+        throw new ApiErrors(404, "Wrong Playlist ID");
+    }
+    
+    if(!isValidObjectId(videoId)){
+        throw new ApiErrors(404, "Wrong videoID");
+    }
+    
+    const playlist = await Playlist.findById(playlistId);
+    if(!playlist){
+        throw new ApiErrors(404, "Playlist not found");
+    }
+    
+    if(playlist.videos.includes(videoId)) {
+        throw new ApiErrors(400, "Video already exists in the playlist");
+    }
+
+    playlist.videos.push(videoId);
+
+    await playlist.save();
+
+    return res.status(200).json(new ApiResponse(200, playlist, "Video added successfully"))
+
+
 });
 
 const removeVideoFromPlaylist = asyncHandler(async (req, res) => {
     const { playlistId, videoId } = req.params;
     // TODO: remove video from playlist
+    if(!isValidObjectId(playlistId)){
+        throw new ApiErrors(404, "Incorrect Playlist ");
+    }
+    if(!isValidObjectId(videoId)){
+        throw new ApiErrors(404, "Incorrect VideoID ");
+    }
+    
+    const playlist = await Playlist.findById(playlistId)
+    if(!playlist){
+        throw new ApiErrors(404, "Playlist not found");
+    }
+    
+    const videoIndex = playlist.videos.indexOf(videoId);
+    if(videoIndex === -1){
+        throw new ApiErrors(404, "Video not found in the playlist");
+    }
+
+    playlist.videos.splice(videoIndex, 1);
+
+    await playlist.save();
+
+    return res.status(200).json(new ApiResponse(200, playlist, "Video deleted successfully"))
+
+
 });
 
 const deletePlaylist = asyncHandler(async (req, res) => {

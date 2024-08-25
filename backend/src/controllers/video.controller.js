@@ -5,7 +5,6 @@ import {ApiErrors} from "../utils/ApiErrors.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import {asyncHandler} from "../utils/asyncHandler.js"
 import cloudinary from "cloudinary"
-// import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 
 const getPublicIdFromUrl = (url) => {
@@ -202,6 +201,7 @@ const togglePublishStatus = asyncHandler(async (req, res) => {
 
     return res.status(200).json(new ApiResponse(200, videoData, "Video publish status toggled successfully"));
 });
+
 export {
     getAllVideos,
     publishAVideo,

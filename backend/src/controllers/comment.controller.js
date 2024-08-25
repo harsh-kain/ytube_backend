@@ -48,6 +48,8 @@ const addComment = asyncHandler(async (req, res) => {
         owner: req?.user?._id,
     });
 
+    console.log(commentData);
+    
     if (!commentData) {
         throw new ApiErrors(404, "Comment cannot be added");
     }

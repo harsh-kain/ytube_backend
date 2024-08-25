@@ -67,7 +67,7 @@ const getUserChannelSubscribers = asyncHandler(async (req, res) => {
     const totalSubscribers = channelSubscribers.length;
 
     return res.status(200)
-              .json(new ApiResponse(200, {channelSubscribers , totalSubscribers}, "Fetched all subscribers"))
+    .json(new ApiResponse(200, {channelSubscribers , totalSubscribers}, "Fetched all subscribers"))
    
     
 });
@@ -82,7 +82,6 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
 
     // Find all subscriptions where the user is the subscriber
     const subscriptions = await Subscription.find({ subscriber: channelId }).populate('channel');
-    console.log(subscriptions);
     
     if (subscriptions.length === 0) {
         throw new ApiErrors(404, "No subscriptions found for this user");
@@ -90,7 +89,6 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
 
     // Extract the list of subscribed channels
     const subscribedChannels = subscriptions.map(sub => sub.channel);
-    console.log(subscribedChannels);
     
     // Return the list of subscribed channels
     return res.status(200)
