@@ -51,7 +51,6 @@ const getAllVideos = asyncHandler(async (req, res) => {
 
 const publishAVideo = asyncHandler(async (req, res) => {
     const { title, description} = req.body
-    // TODO: get video, upload to cloudinary, create video
     if(!title && !description){
         throw new ApiErrors(404,"Enter video title and description")
     }
@@ -108,7 +107,6 @@ const publishAVideo = asyncHandler(async (req, res) => {
 
 const getVideoById = asyncHandler(async (req, res) => {
     const { videoId } = req.params
-    //TODO: get video by id
 
     const videoData = await Video.findById(videoId)
 
@@ -176,7 +174,6 @@ const updateVideo = asyncHandler(async (req, res) => {
 
 const deleteVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
-    //TODO: delete video
     const deleteVideoData = await Video.findByIdAndDelete(videoId);
 
     if(!deleteVideoData){

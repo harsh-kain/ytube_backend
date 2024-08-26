@@ -9,7 +9,6 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 
 const toggleVideoLike = asyncHandler(async (req, res) => {
     const { videoId } = req.params;
-    //TODO: toggle like on video
     if (!isValidObjectId(videoId)) {
         throw new ApiErrors(404, "Incorrect video id");
     }
@@ -41,7 +40,6 @@ const toggleVideoLike = asyncHandler(async (req, res) => {
 
 const toggleCommentLike = asyncHandler(async (req, res) => {
     const { commentId } = req.params;
-    //TODO: toggle like on comment
     if (!isValidObjectId(commentId)) {
         throw new ApiErrors(404, "Incorrect comment id");
     }
@@ -74,7 +72,6 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
 
 const toggleTweetLike = asyncHandler(async (req, res) => {
     const { tweetId } = req.params;
-    //TODO: toggle like on tweet
 
     if (!isValidObjectId(tweetId)) {
         throw new ApiErrors(404, "Incorrect tweet id");
