@@ -8,7 +8,6 @@ import cloudinary from "cloudinary"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 
 const getPublicIdFromUrl = (url) => {
-    console.log(url);
     
     const parts = url.split('/');
     console.log("parts", parts);
