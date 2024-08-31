@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { login } from "../redux/slices/AuthSlice";
+import Cookies from "js-cookie";
 const Login = () => {
     const dispatch = useDispatch();
     const {
@@ -53,7 +54,6 @@ const Login = () => {
 
         try {
             const response = await postRequest("/users/login", formData);
-            console.log(response);
             if(response.success){
                 dispatch(login(response.data.accessToken))
                 toast.success("Logged in Successfully", {

@@ -1,19 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { setAuthenticated } from "../redux/slices/AuthSlice";
+import { useDispatch } from "react-redux";
 const ProtectedRoute = ({ children }) => {
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    console.log(isAuthenticated);
 
-    // useEffect(() => {
-    //     if (!isAuthenticated) {
-    //         navigate("/login")
-    //     }
-    // },[])
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken')
+        if(token){
+            dispatch(setAuthenticated(true))
+        }else{
+            navigate("/login");
+        }
+    }, [isAuthenticated, navigate,dispatch]);
+
     if (!isAuthenticated) {
-        navigate("/login");
+        return null; 
     }
+
     return children;
 };
 

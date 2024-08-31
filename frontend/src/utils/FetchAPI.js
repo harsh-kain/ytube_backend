@@ -1,6 +1,6 @@
 // src/utils/api.js
 import axios from 'axios';
-
+import Cookies from 'js-cookie';
 // Set up a base URL for the API
 const API_BASE_URL = 'http://localhost:5000/api/v1'; 
 
@@ -20,6 +20,15 @@ export const getRequest = async (url, params = {}) => {
     handleError(error);
   }
 };
+axiosInstance.interceptors.request.use((config) => {
+  const token = Cookies.get('accessToken') || localStorage.getItem('accessToken');
+  if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
 
 // Utility function for POST request
 export const postRequest = async (url, data = {}, config={}) => {

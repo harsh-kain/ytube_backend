@@ -2,7 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Videos from "./pages/Videos";
-import NavbarComponent from "./components/Navbar";
+import ComplexNavbar from "./components/Navbar";
 import { postRequest } from "./utils/FetchAPI";
 import { Link, Route, Routes } from "react-router-dom";
 import { checkAuth } from "./redux/slices/AuthSlice";
@@ -35,7 +35,7 @@ function App() {
     return (
         // <Router> {/* Wrap the entire app with Router */}
         <div className="flex justify-center items-center w-full flex-col">
-            <NavbarComponent
+            <ComplexNavbar
                 openDrawer={openDrawer}
                 isDrawerOpen={isDrawerOpen}
             />
