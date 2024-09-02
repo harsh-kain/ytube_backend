@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import VideoCard from "../components/VideoCard";
 import { getRequest } from "../utils/FetchAPI";
 import { ToastContainer, toast } from "react-toastify";
+import RefreshToken from "../components/RefreshToken";
 
 const Videos = () => {
     const [allVideos , setAllVideos]= useState(null)
-    console.log(allVideos);
     const fetchAllVideos = async () => {
         try {
             const response = await getRequest("/videos")
             if(response?.data){
                 setAllVideos(response.data)
             }
-            console.log(response);
         } catch (error) {
             console.log(error);
         }
@@ -21,10 +20,12 @@ const Videos = () => {
     useEffect(() => {
         fetchAllVideos()
     },[])
+    console.log(allVideos);
     return (
-        <div className="flex justify-start items-start flex-wrap ">
+        <div className="flex justify-center items-start flex-wrap w-full mt-[2rem]">
             <ToastContainer />
-            <VideoCard data={allVideos?.videos}/>
+            {allVideos ? <VideoCard data={allVideos?.videos}/> : <RefreshToken />}
+            
         </div>
     );
 };

@@ -1,0 +1,27 @@
+/* In App.css or any relevant CSS file */
+.video-big-wrapper{
+    max-height: 1000px; 
+    overflow: hidden;
+    background-color: black;
+    width: 100%;
+    /* padding: 5rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.player-wrapper{
+    max-width: 1600px;
+    background-color: black;
+    width: 100%;
+    /* padding-top: 56.25%; */
+
+}
+
+.react-player {
+    overflow: hidden;
+    max-height: 900px; 
+    object-fit: contain;
+    /* position: absolute; */
+    /* top: 0; */
+    /* left: 0; */
+}

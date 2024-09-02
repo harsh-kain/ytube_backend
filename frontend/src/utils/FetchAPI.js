@@ -20,15 +20,6 @@ export const getRequest = async (url, params = {}) => {
     handleError(error);
   }
 };
-axiosInstance.interceptors.request.use((config) => {
-  const token = Cookies.get('accessToken') || localStorage.getItem('accessToken');
-  if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-}, (error) => {
-  return Promise.reject(error);
-});
 
 // Utility function for POST request
 export const postRequest = async (url, data = {}, config={}) => {
@@ -60,9 +51,20 @@ export const deleteRequest = async (url, params = {}) => {
   }
 };
 
+axiosInstance.interceptors.request.use((config) => {
+  const token = Cookies.get('accessToken') || localStorage.getItem('accessToken');
+  if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
+
 // Error handling function
 const handleError = (error) => {
-    console.log("this is the whole error", error);
+    // console.log("this is the whole error", error);
   if (error.response) {
     console.error('Server Error:', error);
     throw new Error(error.response.data || 'Server Error');

@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Video from "./pages/Video";
 function App() {
     const dispatch = useDispatch();
 
@@ -46,10 +47,11 @@ function App() {
                 setOpenAlert={setOpenAlert}
                 handleOpen={handleOpen}
             />
-            <div className="containerWrapper w-full flex justify-start items-start flex-wrap mt-[3rem] px-[1rem]">
+            <div className="containerWrapper w-full flex justify-start items-start flex-wrap ">
                 <ToastContainer />
                 <Routes>
                     <Route path="/" element={<Videos />} />
+                    <Route path="/videos/:videoId" element={<Video />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route

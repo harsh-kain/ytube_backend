@@ -23,9 +23,7 @@ const authSlice = createSlice({
         },
         checkAuth : (state) => {
             const token = localStorage.getItem('accessToken')
-            console.log("token from checkauth",token);
             if(token){
-                console.log("in");
                 state.isAuthenticated = true;
                 state.accessToken = token
             }else{
